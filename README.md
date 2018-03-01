@@ -53,29 +53,10 @@ Run
 ## should use host network (test pass)
 docker run -itd \
   --name fastdfs-nginx \
-  --network=host \
-  -v /etc/localtime:/etc/localtime:ro \
-  -v /data/fdfs/logs/:/data/fdfs/logs/ \
-  -v /data/fdfs/data/:/data/fdfs/data/ \
-  -v /var/log/nginx/:/var/log/nginx/ \
-  -v /u01/vs/demo_bbc/:/u01/vs/demo_bbc/ \
-  -v /mnt/vdb/:/mnt/vdb/ \
-  fastdfs-nginx \
-  sh -c "/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart && /usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart && /usr/sbin/nginx -g 'daemon off;'"
-
-## if you want to use your network and use ip 192.168.16.6
-## in this case, you should update some conf to make fdfs work
-## like set tracker_server in storage.conf to 192.168.16.6
-## the app which use fdfs-client-java to upload file should in the same network (not test yet)
-docker run -itd \
-  --name fastdfs-nginx \
-  --network=network0 --ip=192.168.16.6 \
+  --network=host \
   -p 80:80 \
   -p 22122:22122 \
   -p 23000:23000 \
-  -p 24001:24001 \
-  -p 24002:24002 \
-  -p 11411:11411 \
   -v /etc/localtime:/etc/localtime:ro \
   -v /data/fdfs/logs/:/data/fdfs/logs/ \
   -v /data/fdfs/data/:/data/fdfs/data/ \
@@ -84,14 +65,4 @@ docker run -itd \
   -v /mnt/vdb/:/mnt/vdb/ \
   fastdfs-nginx \
   sh -c "/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart && /usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart && /usr/sbin/nginx -g 'daemon off;'"
-``````
-
-API
--------------
-``````
-## fetch file from server, if you need check token
-http://ip:24001/group1/M00/00/00/xxxxxx?tk=zzz&&typ=yyy
-
-## fetch file from server directly
-http://ip:24002/group1/M00/00/00/xxxxxx.yyy
 ``````
