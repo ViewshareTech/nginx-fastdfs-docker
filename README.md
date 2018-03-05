@@ -61,22 +61,11 @@ docker run -itd \
   -p 22122:22122 \
   -p 23000:23000 \
   -v /etc/localtime:/etc/localtime:ro \
-  -v /data/fdfs/logs/:/data/fdfs/logs/ \
-  -v /data/fdfs/data/:/data/fdfs/data/ \
+  -v /data/fdfs/:/data/fdfs/ \
   -v /var/log/nginx/:/var/log/nginx/ \
   -v /u01/vs/:/u01/vs/ \
   -v /mnt/vdb/:/mnt/vdb/ \
   --env FASTDFS_BASE_PATH= \
   --evn TRACKER_SERVER= \
   fastdfs-nginx \
-``````
-
-API
--------------
-``````
-## fetch file from server, if you need check token
-http://ip:24001/group1/M00/00/00/xxxxxx?tk=zzz&&typ=yyy
-
-## fetch file from server directly
-http://ip:24002/group1/M00/00/00/xxxxxx.yyy
 ``````
